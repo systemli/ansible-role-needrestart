@@ -47,13 +47,13 @@ Extended Variables Example
     # Admins should be informed via email
     needrestart_disable_email: 0 
     
-    ## Restart services (l)ist only, (i)nteractive or (a)utomatically.
-    needrestart_action: l
+    ## Restart services (l)ist only, (i)nteractive or (a)utomatically. 
+    needrestart_action: a
     
-    # Email which will be notified
-    needrestart_mail_address: $NR_USERNAME
+    # Email which will be notified, when a service should be restarted 
+    needrestart_mail_address: admin@mydomain.com
     
-    # services which should be ignored
+    # Ignore services below during automatic restart
     needrestart_ignorelist:
       groupname:
          - servicename
