@@ -1,0 +1,9 @@
+#we want email to be send
+needrestart_disable_email: 0 
+
+## Restart services (l)ist only, (i)nteractive or (a)utomatically.
+needrestart_action: l
+
+needrestart_mail_address: $NR_USERNAME
+
+needrestart_ignorelist: []
