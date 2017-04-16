@@ -25,9 +25,6 @@
     - notify.conf
     - needrestart.conf
 
-- debug:
-    var: needrestart_ignorelist
-
 - name: ensure needrestart custimasation config is latest
   template:
     src: "{{ item }}.j2"
@@ -37,6 +34,7 @@
     mode: 0644
   with_items:
     - needrestart_customisations.conf
+  when: needrestart_ignorelist
 
 - name: configure needrestart mail
   template:
