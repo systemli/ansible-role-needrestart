@@ -20,7 +20,7 @@ install:
   - pip install ansible==$ANSIBLE_VERSION
 
   # Install role dependencies
-  - ansible-galaxy install jnv.debian-backports
+  - ansible-galaxy install jnv.debian-backports --roles-path=./
 
   # Add ansible.cfg to pick up roles path.
   - printf "[defaults]\nroles_path = ../" > ansible.cfg
