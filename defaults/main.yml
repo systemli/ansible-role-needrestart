@@ -4,6 +4,8 @@ needrestart_disable_email: 0
 ## Restart services (l)ist only, (i)nteractive or (a)utomatically.
 needrestart_action: l
 
+# Email which will be notified, when a service should be restarted
 needrestart_mail_address: $NR_USERNAME
 
+# Ignore services below during automatic restart
 needrestart_ignorelist: []
