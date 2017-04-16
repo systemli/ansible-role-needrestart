@@ -1,0 +1,47 @@
+---
+# install needrestart
+
+- name: install needrestart from backports
+  apt:
+    pkg: needrestart
+    default_release: jessie-backports
+    state: installed
+  when: ansible_distribution_release == "jessie"
+
+- name: install needrestart
+  apt:
+    pkg: needrestart
+    state: installed
+  when: ansible_distribution_release == "stretch"
+
+- name: ensure needrestart config is latest
+  template:
+    src: "{{ item }}.j2"
+    dest: /etc/needrestart/{{ item }}
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - notify.conf
+    - needrestart.conf
+
+- debug:
+    var: needrestart_ignorelist
+
+- name: ensure needrestart custimasation config is latest
+  template:
+    src: "{{ item }}.j2"
+    dest: /etc/needrestart/conf.d/{{ item }}
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - needrestart_customisations.conf
+
+- name: configure needrestart mail
+  template:
+    src:  600-mail.j2
+    dest: /etc/needrestart/notify.d/600-mail
+    owner: root
+    group: root
+    mode: 0755

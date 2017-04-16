@@ -1,0 +1,10 @@
+# This file is used to override settings from needrestart.conf_main.
+# Overrides are managed by ansible
+
+{% for key, services in needrestart_ignorelist.iteritems()|sort %}
+# {{ key }}
+{% for service in services|sort %}
+$nrconf{override_rc}->{q(^{{ service }})} = 0;
+{% endfor %}
+
+{% endfor %}

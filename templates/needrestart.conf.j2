@@ -1,0 +1,155 @@
+
+# needrestart - Restart daemons after library updates.
+#
+# Authors:
+#   Thomas Liske <thomas@fiasko-nw.net>
+#
+# Copyright Holder:
+#   2013 - 2015 (C) Thomas Liske [http://fiasko-nw.net/~thomas/]
+#
+# License:
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+#
+
+# This is the configuration file of needrestart. This is perl syntax.
+# needrstart uses reasonable default values, you might not need to
+# change anything.
+
+# Verbosity:
+#  0 => quiet
+#  1 => normal (default)
+#  2 => verbose
+#$nrconf{verbosity} = 2;
+
+# Path of the package manager hook scripts.
+#$nrconf{hook_d} = '/etc/needrestart/hook.d';
+
+# Path of user notification scripts.
+#$nrconf{notify_d} = '/etc/needrestart/notify.d';
+
+# Disable sending notifications to user sessions running obsolete binaries
+# using scripts from $nrconf{notify_d}.
+#$nrconf{sendnotify} = 0;
+
+# Restart services (l)ist only, (i)nteractive or (a)utomatically.
+$nrconf{restart} = '{{ needrestart_action }}';
+
+# Use prefered UI package.
+#$nrconf{ui} = 'NeedRestart::UI::stdio';
+
+# Change default answer to 'no' in (i)nteractive mode.
+#$nrconf{defno} = 1;
+
+# Set UI mode to (e)asy or (a)dvanced.
+#$nrconf{ui_mode} = 'e';
+
+# Print a combined `systemctl restart` command line for skipped services.
+#$nrconf{systemctl_combine} = 1;
+
+# Blacklist binaries (list of regex).
+$nrconf{blacklist} = [
+    # ignore sudo (not a daemon)
+    q(^/usr/bin/sudo(\.dpkg-new)?$),
+
+    # ignore DHCP clients
+    q(^/sbin/(dhclient|dhcpcd5|pump|udhcpc)(\.dpkg-new)?$),
+
+    # ignore apt-get (Debian Bug#784237)
+    q(^/usr/bin/apt-get(\.dpkg-new)?$),
+];
+
+# Blacklist services (list of regex) - USE WITH CARE.
+# You should prefere to put services to $nrconf{override_rc} instead.
+# Any service listed in $nrconf{blacklist_rc} we be ignored completely!
+#$nrconf{blacklist_rc} = [
+#];
+
+# Override service default selection (hash of regex).
+$nrconf{override_rc} = {
+    # DBus
+    q(^dbus) => 0,
+
+    # display managers
+    q(^gdm) => 0,
+    q(^kdm) => 0,
+    q(^nodm) => 0,
+    q(^sddm) => 0,
+    q(^wdm) => 0,
+    q(^xdm) => 0,
+    q(^lightdm) => 0,
+    q(^slim) => 0,
+
+    # networking stuff
+    q(^network-manager) => 0,
+    q(^NetworkManager) => 0,
+    q(^wpa_supplicant) => 0,
+    q(^openvpn) => 0,
+    q(^quagga) => 0,
+    q(^tinc) => 0,
+
+    # gettys
+    q(^getty@.+\.service) => 0,
+
+    # systemd --user
+    q(^user@\d+\.service) => 0,
+
+    # misc
+    q(^zfs-fuse) => 0,
+    q(^mythtv-backend) => 0,
+    q(^xendomains) => 0,
+    q(^lxcfs) => 0,
+
+    # workaround for broken systemd-journald
+    # (see also Debian Bug#771122 & #771254)
+    q(^systemd-journald) => 0,
+
+    # more systemd stuff
+    # (see also Debian Bug#784238 & #784437)
+    q(^emergency\.service$) => 0,
+    q(^rescue\.service$) => 0,
+
+    # don't restart systemd-logind, see #798097
+    q(^systemd-logind) => 0,
+};
+
+# Override container default selection (hash of regex).
+$nrconf{override_cont} = {
+};
+
+# Disable interpreter scanners.
+#$nrconf{interpscan} = 0;
+
+# Enable/disable hints on pending kernel upgrades:
+#  1: requires the user to acknowledge pending kernels
+#  0: disable kernel checks completely
+# -1: print kernel hints to stderr only
+#$nrconf{kernelhints} = -1;
+
+# Nagios Plugin: configure return code use by nagios
+# as service status[1].
+#
+# [1] https://nagios-plugins.org/doc/guidelines.html#AEN78
+#
+# Default:
+#  'nagios-status' => {
+#     'sessions' => 1,
+#     'services' => 2,
+#     'kernel' => 2,
+#     'containers' => 1
+#  },
+#
+# Example: to ignore outdated sessions (status OK)
+# $nrconf{'nagios-status'}->{sessions} = 0;
+
+
+# Read additional config snippets.
+if(-d q(/etc/needrestart/conf.d)) {
+      foreach my $fn (sort </etc/needrestart/conf.d/*.conf>) {
+	      print STDERR "$LOGPREF eval $fn\n" if($nrconf{verbose});
+	      eval do { local(@ARGV, $/) = $fn; <>};
+	      die "Error parsing $fn: $@" if($@);
+      }
+}
