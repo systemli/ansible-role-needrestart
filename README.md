@@ -1,7 +1,7 @@
 ansible-role-needrestart
 ================
 
-[![Build Status](https://travis-ci.org/systemli/ansible-role-needrestart.svg)](https://travis-ci.org/systemli/ansible-role-needrestart) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-needrestart-blue.svg)](https://galaxy.ansible.com/systemli/needrestart/)
+[![Build Status](https://travis-ci.org/systemli/ansible-role-needrestart.svg)](https://travis-ci.org/systemli/ansible-role-needrestart) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-needrestart-blue.svg)](https://galaxy.ansible.com/systemli/ansible-role-needrestart/)
 
 Role to install & maintain needrestart 
 
