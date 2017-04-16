@@ -65,3 +65,11 @@ tramp
 # Org-mode files
 .org-id-locations
 *_archive
+
+# Testing files
+.molecule/
+.cache
+.molecule
+.tox
+.vagrant
+tests/__pycache__
