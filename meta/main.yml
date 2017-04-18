@@ -3,7 +3,7 @@ galaxy_info:
   author: systemli
   description: Install and maintain needrestart software, to check which daemons need to be restarted after library upgrades. Contains tests for Molecule.
   company: systemli.org
-  license: license (GPLv2, CC-BY, etc)
+  license: GPLv3
   min_ansible_version: 1.8
   galaxy_tags:
   - security
