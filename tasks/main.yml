@@ -17,7 +17,7 @@
 - name: ensure needrestart config is latest
   template:
     src: "{{ item }}.j2"
-    dest: /etc/needrestart/{{ item }}
+    dest: "/etc/needrestart/{{ item }}"
     owner: root
     group: root
     mode: 0644
@@ -28,7 +28,7 @@
 - name: ensure needrestart custimasation config is latest
   template:
     src: "{{ item }}.j2"
-    dest: /etc/needrestart/conf.d/{{ item }}
+    dest: "/etc/needrestart/conf.d/{{ item }}"
     owner: root
     group: root
     mode: 0644
