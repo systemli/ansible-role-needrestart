@@ -11,16 +11,21 @@ Role Variables
 Defaults:
 
     # Admins should be informed via email
-    needrestart_disable_email: 0 
+    needrestart_notifyd_disable_email: 0
     
-    ## Restart services (l)ist only, (i)nteractive or (a)utomatically.
+    # All other notifications should be disabled
+    needrestart_notifyd_disable_write_tty: 1
+    needrestart_notifyd_disable_needrestart_session: 1
+    needrestart_notifyd_disable_notify_send: 1
+    
+    # Restart services (l)ist only, (i)nteractive or (a)utomatically.
     needrestart_action: l
     
     # Email which will be notified
     needrestart_mail_address: $NR_USERNAME
     
-    # services which should be ignored
-    needrestart_ignorelist: []
+    # Services which should be ignored
+    needrestart_ignorelist: [] 
 
 Download
 --------
