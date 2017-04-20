@@ -1,8 +1,11 @@
-#we want email to be send
-needrestart_disable_email: 0
+needrestart_notifyd_disable_write_tty: 1
+needrestart_notifyd_disable_needrestart_session: 1
+needrestart_notifyd_disable_notify_send: 1
+#we want email to be as send default
+needrestart_notifyd_disable_email: 0
 
 ## Restart services (l)ist only, (i)nteractive or (a)utomatically.
-needrestart_action: l
+needrestart_action: i
 
 # Email which will be notified, when a service should be restarted
 needrestart_mail_address: $NR_USERNAME
