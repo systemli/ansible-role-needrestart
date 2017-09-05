@@ -1,18 +1,11 @@
 ---
 # install needrestart
 
-- name: install needrestart from backports
-  apt:
-    pkg: needrestart
-    default_release: jessie-backports
-    state: installed
-  when: ansible_distribution_release == "jessie"
-
 - name: install needrestart
   apt:
     pkg: needrestart
-    state: installed
-  when: ansible_distribution_release == "stretch"
+    state: present
+    default_release: "{{ 'jessie-backports' if ansible_distribution_release == 'jessie' else omit }}"
 
 - name: ensure needrestart config is latest
   template:
