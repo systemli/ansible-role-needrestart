@@ -31,7 +31,7 @@
 
 - name: configure needrestart mail
   template:
-    src:  600-mail.j2
+    src: 600-mail.j2
     dest: /etc/needrestart/notify.d/600-mail
     owner: root
     group: root
