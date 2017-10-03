@@ -22,7 +22,7 @@ Defaults:
     needrestart_action: l
     
     # Email which will be notified
-    needrestart_mail_address: $NR_USERNAME
+    needrestart_mail_address: root
     
     # Services which should be ignored
     needrestart_ignorelist: [] 
