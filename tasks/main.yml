@@ -18,7 +18,7 @@
     - notify.conf
     - needrestart.conf
 
-- name: ensure needrestart custimasation config is latest
+- name: ensure needrestart customisation config is latest
   template:
     src: "{{ item }}.j2"
     dest: "/etc/needrestart/conf.d/{{ item }}"
