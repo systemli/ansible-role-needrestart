@@ -44,5 +44,8 @@ echo "[$0] notify user $NR_USERNAME on $NR_SESSION via mail" 1>&2
     gettext "Please consider a relogin or restart of the affected processes!"
     echo
     echo
+    gettext "Please consider a relogin or restart of the affected processes!"
+    echo
+    echo
     cat
 } | fold -s -w 72 | "$MAILX" -s "Relogin or restarts on host $(hostname) required!" "{{ needrestart_mail_address }}"

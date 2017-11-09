@@ -1,5 +1,5 @@
-# This file is used to override settings from needrestart.conf_main.
-# Overrides are managed by ansible
+# This file overrides the ignore list from needrestart.conf.
+# It is managed by Ansible.
 
 {% for key, services in needrestart_ignorelist.iteritems()|sort %}
 # {{ key }}
