@@ -18,16 +18,14 @@
     - notify.conf
     - needrestart.conf
 
-- name: ensure needrestart customisation config is latest
+- name: ensure needrestart ignorelist config include is latest
   template:
-    src: "{{ item }}.j2"
-    dest: "/etc/needrestart/conf.d/{{ item }}"
+    src: "needrestart_ignorelist.conf.j2"
+    dest: "/etc/needrestart/conf.d/ignorelist.conf"
     owner: root
     group: root
     mode: 0644
-  with_items:
-    - needrestart_customisations.conf
-  when: needrestart_ignorelist
+  when: needrestart_ignorelist|d()
 
 - name: configure needrestart mail
   template:
