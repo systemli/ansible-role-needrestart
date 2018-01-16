@@ -34,3 +34,26 @@
     owner: root
     group: root
     mode: 0755
+
+- name: install check_needrestart as a check_mk local check
+  copy:
+    src: check_needrestart
+    dest: "{{ needrestart_checkmk_localcheckdir }}/check_needrestart"
+  when: needrestart_checkmk_localcheck | default(False)
+
+- name: register check_needrestart as a mrpe check
+  lineinfile:
+    dest: /etc/check_mk/mrpe.cfg
+    line: "NEEDRESTART\tsudo -n -- /usr/sbin/needrestart -p"
+    state: present
+    create: yes
+    mode: 0644
+  when: needrestart_checkmk_mrpe | default(False)
+
+- name: un-register check_needrestart as a mrpe check
+  lineinfile:
+    path: /etc/check_mk/mrpe.cfg
+    regexp: '^NEEDRESTART\s+sudo -n -- /usr/sbin/needrestart -p'
+    state: absent
+  when: not (needrestart_checkmk_mrpe | default(False))
+
