@@ -1,0 +1,23 @@
+#! /bin/bash
+#
+# wrapper script to use the nagios plugin mode of needrestart
+# as a check_mk local check (see: https://mathias-kettner.de/checkmk_localchecks.html)
+#
+
+declare -r OFILE=/tmp/.needrestart.out
+
+sudo -n -- /usr/sbin/needrestart -p > $OFILE 2>/dev/null
+
+declare -ri STATUSERR=$?
+
+STATUSERRTXT="OK"
+if [ $STATUSERR -eq 1 ]; then
+	STATUSERRTXT="WARNING"
+elif [ $STATUSERR -gt 1 ]; then
+	STATUSERRTXT="CRITICAL"
+fi
+STATUSDESCR=$(echo $(cat $OFILE | sed '1d'))
+STATUSPERF=$(cat $OFILE | sed '1!d; s/.*| *//g;s/ /|/g')
+
+echo "$STATUSERR NEEDRESTART $STATUSPERF $STATUSERRTXT - $STATUSDESCR"
+exit $STATUSERR
