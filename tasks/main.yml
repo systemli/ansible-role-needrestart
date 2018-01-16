@@ -52,7 +52,7 @@
 
 - name: un-register check_needrestart as a mrpe check
   lineinfile:
-    path: /etc/check_mk/mrpe.cfg
+    dest: /etc/check_mk/mrpe.cfg
     regexp: '^NEEDRESTART\s+sudo -n -- /usr/sbin/needrestart -p'
     state: absent
   when: not (needrestart_checkmk_mrpe | default(False))
