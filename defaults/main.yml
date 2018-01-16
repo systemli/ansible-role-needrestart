@@ -15,3 +15,8 @@ needrestart_mail_address: $NR_USERNAME
 
 # Services which should be ignored
 needrestart_ignorelist: []
+
+# needrestart check_mk related
+needrestart_checkmk_localcheckdir: /usr/lib/check_mk_agent/local
+needrestart_checkmk_localcheck: False
+needrestart_checkmk_mrpe: False
