@@ -39,6 +39,7 @@
   copy:
     src: check_needrestart
     dest: "{{ needrestart_checkmk_localcheckdir }}/check_needrestart"
+    mode: 0755
   when: needrestart_checkmk_localcheck | default(False)
 
 - name: register check_needrestart as a mrpe check
