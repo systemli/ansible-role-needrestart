@@ -3,7 +3,6 @@ scenario:
   name: docker
 dependency:
   name: galaxy
-  requirements_file: ../default/requirements.yml
 driver:
   name: docker
 lint:
