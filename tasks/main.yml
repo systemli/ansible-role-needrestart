@@ -57,4 +57,3 @@
     regexp: '^NEEDRESTART\s+sudo -n -- /usr/sbin/needrestart -p'
     state: absent
   when: not (needrestart_checkmk_mrpe | default(False))
-
