@@ -24,6 +24,7 @@ provisioner:
     name: ansible-lint
     enabled: false
   playbooks:
+    dependency: ../default/requirements.yml
     converge: ../default/playbook.yml
 verifier:
   name: testinfra
