@@ -3,6 +3,7 @@ scenario:
   name: docker
 dependency:
   name: galaxy
+  requirements_file: ../default/requirements.yml
 driver:
   name: docker
 lint:
@@ -24,7 +25,6 @@ provisioner:
     name: ansible-lint
     enabled: false
   playbooks:
-    dependency: ../default/requirements.yml
     converge: ../default/playbook.yml
 verifier:
   name: testinfra
