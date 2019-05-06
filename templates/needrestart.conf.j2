@@ -69,7 +69,7 @@ $nrconf{blacklist} = [
     # ignore apt-get (Debian Bug#784237)
     qr(^/usr/bin/apt-get(\.dpkg-new)?$),
 
-{% for blacklistbin in needrestart_blacklist -%}
+{% for blacklistbin in needrestart_blacklist %}
     {{ blacklistbin }},
 {% endfor -%}
 
