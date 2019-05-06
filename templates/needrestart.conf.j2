@@ -69,17 +69,19 @@ $nrconf{blacklist} = [
     # ignore apt-get (Debian Bug#784237)
     qr(^/usr/bin/apt-get(\.dpkg-new)?$),
 
-{% for blacklistbin in needrestart_blacklist %}
-    {{ blacklistbin }},
-{% endfor -%}
-
+{% for blacklistbin in needrestart_blacklist_bin %}
+    qr(^{{ blacklistbin }}$),
+{% endfor %}
 ];
 
 # Blacklist services (list of regex) - USE WITH CARE.
 # You should prefere to put services to $nrconf{override_rc} instead.
 # Any service listed in $nrconf{blacklist_rc} we be ignored completely!
-#$nrconf{blacklist_rc} = [
-#];
+$nrconf{blacklist_rc} = [
+{% for blacklistrc in needrestart_blacklist_rc %}
+    qr(^{{ blacklistrc }}$),
+{% endfor %}
+];
 
 # Override service default selection (hash of regex).
 $nrconf{override_rc} = {
