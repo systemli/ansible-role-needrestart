@@ -70,7 +70,7 @@ $nrconf{blacklist} = [
     qr(^/usr/bin/apt-get(\.dpkg-new)?$),
 
 {% for blacklistbin in needrestart_blacklist -%}
-    {{ blacklistbin }}
+    {{ blacklistbin }},
 {% endfor -%}
 
 ];
