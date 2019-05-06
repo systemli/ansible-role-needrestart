@@ -1,7 +1,7 @@
 # This file overrides the ignore list from needrestart.conf.
 # It is managed by Ansible.
 
-{% for key, services in needrestart_ignorelist.iteritems()|sort %}
+{% for key, services in needrestart_ignorelist.items()|sort %}
 # {{ key }}
 {% for service in services|sort %}
 $nrconf{override_rc}->{q(^{{ service }})} = 0;
