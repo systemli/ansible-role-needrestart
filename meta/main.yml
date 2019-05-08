@@ -14,8 +14,6 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
-        - jessie
         - stretch
 
-dependencies:
-  - {role: jnv.debian-backports, when: ansible_distribution_release == 'jessie'}
+dependencies: []
