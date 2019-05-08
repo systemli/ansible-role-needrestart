@@ -16,6 +16,18 @@ needrestart_mail_address: $NR_USERNAME
 # Services which should be ignored
 needrestart_ignorelist: []
 
+# Services blacklisted as regex
+# Example:
+# needrestart_blacklist_rc:
+#   - cron\.service
+needrestart_blacklist_rc: []
+
+# Blacklist binaries as regex
+# Example:
+# needrestart_blacklist_bin:
+#   - /opt/.*/java
+needrestart_blacklist_bin: []
+
 # needrestart check_mk related
 needrestart_checkmk_localcheckdir: /usr/lib/check_mk_agent/local
 needrestart_checkmk_localcheck: False
