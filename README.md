@@ -25,7 +25,19 @@ Defaults:
     needrestart_mail_address: $NR_USERNAME
     
     # Services which should be ignored
-    needrestart_ignorelist: [] 
+    needrestart_ignorelist: []
+
+    # Services blacklisted as regex
+    # Example:
+    # needrestart_blacklist_rc:
+    #   - cron\.service
+    needrestart_blacklist_rc: []
+    
+    # Blacklist binaries as regex
+    # Example:
+    # needrestart_blacklist_bin:
+    #   - /opt/.*/java
+    needrestart_blacklist_bin: []
 
 Download
 --------
@@ -40,8 +52,6 @@ Example Playbook
     - hosts: servers
       roles:
          - { role: systemli.needrestart }
-
-
 
 Extended Variables Example
 --------------------------
@@ -75,16 +85,12 @@ Testing & Development
 Tests
 -----
 
-For developing and testing the role we use Travis CI, Molecule and Vagrant. On the local environment you can easily test the role with
+Molecule, Docker and Travis CI is used for continous testing.
+On the local environment you can easily test the role with
 
-Run local tests with:
+    molecule test 
 
-```
-molecule test 
-```
-
-Requires Molecule, Vagrant and `python-vagrant` to be installed.For developing and testing the role we use Travis CI, Molecule and Vagrant. On the local environment you can easily test the role with
-
+This requires Molecule, Vagrant and `python-vagrant` to be installed.
 
 License
 -------
