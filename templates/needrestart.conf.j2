@@ -5,7 +5,7 @@
 #   Thomas Liske <thomas@fiasko-nw.net>
 #
 # Copyright Holder:
-#   2013 - 2017 (C) Thomas Liske [http://fiasko-nw.net/~thomas/]
+#   2013 - 2018 (C) Thomas Liske [http://fiasko-nw.net/~thomas/]
 #
 # License:
 #   This program is free software; you can redistribute it and/or modify
@@ -43,7 +43,11 @@
 # to enable legacy session detection!
 #$nrconf{has_pam_systemd} = 0;
 
-# Restart services (l)ist only, (i)nteractive or (a)utomatically.
+# Restart mode: (l)ist only, (i)nteractive or (a)utomatically.
+#
+# ATTENTION: If needrestart is configured to run in interactive mode but is run
+# non-interactive (i.e. unattended-upgrades) it will fallback to list only mode.
+#
 $nrconf{restart} = '{{ needrestart_action }}';
 
 # Use preferred UI package.
@@ -100,12 +104,17 @@ $nrconf{override_rc} = {
     qr(^lxdm) => 0,
 
     # networking stuff
+    qr(^bird) => 0,
+    qr(^networking) => 0,
     qr(^network-manager) => 0,
     qr(^NetworkManager) => 0,
+    qr(^ModemManager) => 0,
     qr(^wpa_supplicant) => 0,
     qr(^openvpn) => 0,
     qr(^quagga) => 0,
+    qr(^frr) => 0,
     qr(^tinc) => 0,
+    qr(^(open|free|libre|strong)swan) => 0,
 
     # gettys
     qr(^getty@.+\.service) => 0,
@@ -118,24 +127,28 @@ $nrconf{override_rc} = {
     qr(^mythtv-backend) => 0,
     qr(^xendomains) => 0,
     qr(^lxcfs) => 0,
-
+    qr(^libvirt) => 0,
+    qr(^docker) => 0,
+{% if ansible_distribution_release == 'stretch' %}
     # workaround for broken systemd-journald
     # (see also Debian Bug#771122 & #771254)
     qr(^systemd-journald) => 0,
+{% endif %}
 
-    # more systemd stuff
+    # systemd stuff
     # (see also Debian Bug#784238 & #784437)
     qr(^emergency\.service$) => 0,
     qr(^rescue\.service$) => 0,
 
-	# Do not restart oneshot service apt-daily, unattended-upgrades.service
-	# and apt-daily-upgrade.service,see #862840
-	qr(^apt-daily\.service$) => 0,
-	qr(^apt-daily-upgrade\.service$) => 0,
-	qr(^unattended-upgrades\.service$) => 0,
+    # do not restart oneshot services, see also #862840
+    qr(^apt-daily\.service$) => 0,
+    qr(^apt-daily-upgrade\.service$) => 0,
+    qr(^unattended-upgrades\.service$) => 0,
+    # do not restart oneshot services from systemd-cron, see also #917073
+    qr(^cron-.*\.service$) => 0,
 
-	# Ignore rc-local.service, see #852864
-	qr(^rc-local\.service$) => 0,
+    # ignore rc-local.service, see #852864
+    qr(^rc-local\.service$) => 0,
 
     # don't restart systemd-logind, see #798097
     qr(^systemd-logind) => 0,
@@ -160,13 +173,25 @@ $nrconf{blacklist_interp} = [
 # Ignore +x mapped files matching one of these regexs:
 $nrconf{blacklist_mappings} = [
     # special device paths
-    qr(^/(SYSV00000000$|drm$|dev/)),
+    qr(^/(SYSV00000000( \(deleted\))?|drm(\s|$)|dev/)),
 
     # aio(7) mapping
     qr(^/\[aio\]),
 
     # Oil Runtime Compiler's JIT files
     qr#/orcexec\.[\w\d]+( \(deleted\))?$#,
+
+    # plasmashell (issue #65)
+    qr(/#\d+( \(deleted\))?$),
+
+    # Java Native Access
+    qr#/tmp/jna--#,
+
+    # Java Foreign Function Interface
+    qr#^/tmp/jffi#,
+
+    # elasticsearch
+    qr#^/tmp/elasticsearch\.#,
 ];
 
 # Verify mapped files in fileystem:
@@ -181,6 +206,11 @@ $nrconf{skip_mapfiles} = (-d '/proc/sys/kernel/grsecurity' ? -1 : 0);
 # -1: print kernel hints to stderr only
 #$nrconf{kernelhints} = -1;
 
+# Enable/disable CPU microcode update hints:
+#  1: requires the user to acknowledge pending updates
+#  0: disable microcode checks completely
+#$nrconf{ucodehints} = 0;
+
 # Nagios Plugin: configure return code use by nagios
 # as service status[1].
 #
@@ -191,6 +221,7 @@ $nrconf{skip_mapfiles} = (-d '/proc/sys/kernel/grsecurity' ? -1 : 0);
 #     'sessions' => 1,
 #     'services' => 2,
 #     'kernel' => 2,
+#     'ucode' => 2,
 #     'containers' => 1
 #  },
 #
