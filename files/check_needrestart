@@ -16,7 +16,7 @@ if [ $STATUSERR -eq 1 ]; then
 elif [ $STATUSERR -gt 1 ]; then
 	STATUSERRTXT="CRITICAL"
 fi
-STATUSDESCR=$(echo $(cat $OFILE | sed '1d'))
+STATUSDESCR=$(cat $OFILE | sed '1!d; s/^[A-Z]\+ - //g;s/|.*//g')
 STATUSPERF=$(cat $OFILE | sed '1!d; s/.*| *//g;s/ /|/g')
 
 echo "$STATUSERR NEEDRESTART $STATUSPERF $STATUSERRTXT - $STATUSDESCR"
