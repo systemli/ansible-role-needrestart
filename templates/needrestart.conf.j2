@@ -209,7 +209,7 @@ $nrconf{skip_mapfiles} = (-d '/proc/sys/kernel/grsecurity' ? -1 : 0);
 # Enable/disable CPU microcode update hints:
 #  1: requires the user to acknowledge pending updates
 #  0: disable microcode checks completely
-#$nrconf{ucodehints} = 0;
+$nrconf{ucodehints} = {{ needrestart_ucodehints }};
 
 # Nagios Plugin: configure return code use by nagios
 # as service status[1].

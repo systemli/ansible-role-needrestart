@@ -10,6 +10,9 @@ needrestart_notifyd_disable_notify_send: 1
 # Restart services (l)ist only, (i)nteractive or (a)utomatically.
 needrestart_action: l
 
+# Enable/disable (1/0) CPU microcode update hints; default: 1=enable
+needrestart_ucodehints: 1
+
 # Email which will be notified
 needrestart_mail_address: $NR_USERNAME
 
