@@ -1,7 +1,8 @@
 ansible-role-needrestart
 ================
 
-[![Build Status](https://travis-ci.org/systemli/ansible-role-needrestart.svg)](https://travis-ci.org/systemli/ansible-role-needrestart) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-needrestart-blue.svg)](https://galaxy.ansible.com/systemli/needrestart/)
+[![Build Status](https://github.com/systemli/ansible-role-needrestart/workflows/Molecule/badge.svg?branch=master)](https://github.com/systemli/ansible-role-needrestart/actions?query=workflow%3AMolecule)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-needrestart-blue.svg)](https://galaxy.ansible.com/systemli/needrestart/)
 
 Role to install & maintain needrestart 
 
@@ -85,7 +86,7 @@ Testing & Development
 Tests
 -----
 
-Molecule, Docker and Travis CI is used for continous testing.
+Molecule, Docker and Github Actions is used for continous testing.
 On the local environment you can easily test the role with
 
     molecule test 
