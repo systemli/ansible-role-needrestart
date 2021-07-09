@@ -5,6 +5,7 @@
   apt:
     pkg: needrestart
     state: present
+    cache_valid_time: 600
 
 - name: ensure needrestart config is latest
   template:
