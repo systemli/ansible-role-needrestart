@@ -14,7 +14,7 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
+        - bullseye
         - buster
-        - stretch
 
 dependencies: []
