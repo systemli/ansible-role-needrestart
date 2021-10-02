@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: needrestart
   author: systemli
   description: |
     Install and maintain needrestart software, to check which daemons need
