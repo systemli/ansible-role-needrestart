@@ -1,7 +1,7 @@
 ansible-role-needrestart
 ================
 
-[![Build Status](https://github.com/systemli/ansible-role-needrestart/workflows/Integration/badge.svg?branch=master)](https://github.com/systemli/ansible-role-needrestart/actions?query=workflow%3AIntegration)
+[![Build Status](https://github.com/systemli/ansible-role-needrestart/workflows/Integration/badge.svg?branch=main)](https://github.com/systemli/ansible-role-needrestart/actions?query=workflow%3AIntegration)
 [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-needrestart-blue.svg)](https://galaxy.ansible.com/systemli/needrestart/)
 
 Role to install & maintain needrestart 
