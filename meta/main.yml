@@ -7,7 +7,7 @@ galaxy_info:
      to be restarted after library upgrades. Contains tests for Molecule.
   company: systemli.org
   license: GPLv3
-  min_ansible_version: 1.8
+  min_ansible_version: "1.8"
   galaxy_tags:
     - security
     - needrestart
