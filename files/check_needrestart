@@ -6,7 +6,12 @@
 
 declare -r OFILE=/tmp/.needrestart.out
 
-sudo -n -- /usr/sbin/needrestart -p > $OFILE 2>/dev/null
+which sudo >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+	sudo -n -- /usr/sbin/needrestart -p > $OFILE 2>/dev/null
+else
+	/usr/sbin/needrestart -p > $OFILE 2>/dev/null
+fi
 
 declare -ri STATUSERR=$?
 
