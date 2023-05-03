@@ -1,13 +1,13 @@
 ---
 # install needrestart
 
-- name: install needrestart
+- name: Install needrestart
   apt:
     pkg: needrestart
     state: present
     cache_valid_time: 600
 
-- name: ensure needrestart config is latest
+- name: Ensure needrestart config is latest
   template:
     src: "{{ item }}.j2"
     dest: "/etc/needrestart/{{ item }}"
@@ -18,7 +18,7 @@
     - notify.conf
     - needrestart.conf
 
-- name: ensure needrestart ignorelist config include is latest
+- name: Ensure needrestart ignorelist config include is latest
   template:
     src: "needrestart_ignorelist.conf.j2"
     dest: "/etc/needrestart/conf.d/ignorelist.conf"
@@ -27,7 +27,7 @@
     mode: 0644
   when: needrestart_ignorelist|d()
 
-- name: configure needrestart mail
+- name: Configure needrestart mail
   template:
     src: 600-mail.j2
     dest: /etc/needrestart/notify.d/600-mail
@@ -35,7 +35,7 @@
     group: root
     mode: 0755
 
-- name: ensure the directory for check_mk local check exists
+- name: Ensure the directory for check_mk local check exists
   file:
     path: "{{ needrestart_checkmk_localcheckdir }}"
     state: directory
@@ -44,14 +44,14 @@
     mode: 0755
   when: needrestart_checkmk_localcheck | default(False)
 
-- name: install check_needrestart as a check_mk local check
+- name: Install check_needrestart as a check_mk local check
   copy:
     src: check_needrestart
     dest: "{{ needrestart_checkmk_localcheckdir }}/check_needrestart"
     mode: 0755
   when: needrestart_checkmk_localcheck | default(False)
 
-- name: ensure check_mk mrpe file exists
+- name: Ensure check_mk mrpe file exists
   file:
     path: /etc/check_mk/mrpe.cfg
     state: file
@@ -60,7 +60,7 @@
     mode: 0644
   when: needrestart_checkmk_mrpe | default(False)
 
-- name: register check_needrestart as a mrpe check
+- name: Register check_needrestart as a mrpe check
   lineinfile:
     dest: /etc/check_mk/mrpe.cfg
     line: "NEEDRESTART\tsudo -n -- /usr/sbin/needrestart -p"
@@ -69,7 +69,7 @@
     mode: 0644
   when: needrestart_checkmk_mrpe | default(False)
 
-- name: un-register check_needrestart as a mrpe check
+- name: Un-register check_needrestart as a mrpe check
   lineinfile:
     dest: /etc/check_mk/mrpe.cfg
     regexp: '^NEEDRESTART\s+sudo -n -- /usr/sbin/needrestart -p'
