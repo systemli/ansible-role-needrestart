@@ -1,4 +1,4 @@
 ---
-skip_list:
-  - fqcn-builtins
-  - no-tabs
+exclude_paths:
+  - molecule/
+  - .github/

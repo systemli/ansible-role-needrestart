@@ -2,75 +2,75 @@
 # install needrestart
 
 - name: Install needrestart
-  apt:
+  ansible.builtin.apt:
     pkg: needrestart
     state: present
     cache_valid_time: 600
 
 - name: Ensure needrestart config is latest
-  template:
+  ansible.builtin.template:
     src: "{{ item }}.j2"
     dest: "/etc/needrestart/{{ item }}"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   with_items:
     - notify.conf
     - needrestart.conf
 
 - name: Ensure needrestart ignorelist config include is latest
-  template:
+  ansible.builtin.template:
     src: "needrestart_ignorelist.conf.j2"
     dest: "/etc/needrestart/conf.d/ignorelist.conf"
     owner: root
     group: root
-    mode: 0644
-  when: needrestart_ignorelist|d()
+    mode: "0644"
+  when: needrestart_ignorelist | default()
 
 - name: Configure needrestart mail
-  template:
+  ansible.builtin.template:
     src: 600-mail.j2
     dest: /etc/needrestart/notify.d/600-mail
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
 
 - name: Ensure the directory for check_mk local check exists
-  file:
+  ansible.builtin.file:
     path: "{{ needrestart_checkmk_localcheckdir }}"
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   when: needrestart_checkmk_localcheck | default(False)
 
 - name: Install check_needrestart as a check_mk local check
-  copy:
+  ansible.builtin.copy:
     src: check_needrestart
     dest: "{{ needrestart_checkmk_localcheckdir }}/check_needrestart"
-    mode: 0755
+    mode: "0755"
   when: needrestart_checkmk_localcheck | default(False)
 
 - name: Ensure check_mk mrpe file exists
-  file:
+  ansible.builtin.file:
     path: /etc/check_mk/mrpe.cfg
     state: file
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when: needrestart_checkmk_mrpe | default(False)
 
 - name: Register check_needrestart as a mrpe check
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/check_mk/mrpe.cfg
     line: "NEEDRESTART\tsudo -n -- /usr/sbin/needrestart -p"
     state: present
     create: yes
-    mode: 0644
+    mode: "0644"
   when: needrestart_checkmk_mrpe | default(False)
 
 - name: Un-register check_needrestart as a mrpe check
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/check_mk/mrpe.cfg
     regexp: '^NEEDRESTART\s+sudo -n -- /usr/sbin/needrestart -p'
     state: absent
