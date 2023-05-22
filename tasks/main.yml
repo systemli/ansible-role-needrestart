@@ -18,6 +18,14 @@
     - notify.conf
     - needrestart.conf
 
+- name: Ensure custom needrestart config is deployed
+  ansible.builtin.template:
+    src: "custom_needrestart.conf.j2"
+    dest: "/etc/needrestart/conf.d/custom_needrestart.conf"
+    owner: root
+    group: root
+    mode: "0644"
+
 - name: Ensure needrestart ignorelist config include is latest
   ansible.builtin.template:
     src: "needrestart_ignorelist.conf.j2"
