@@ -9,13 +9,11 @@
 
 - name: Ensure needrestart config is latest
   ansible.builtin.template:
-    src: "{{ item }}.j2"
-    dest: "/etc/needrestart/{{ item }}"
+    src: "notify.conf.j2"
+    dest: "/etc/needrestart/notify.conf"
     owner: root
     group: root
     mode: "0644"
-  with_items:
-    - notify.conf
 
 - name: Ensure custom needrestart config is deployed
   ansible.builtin.template:
