@@ -33,7 +33,7 @@
     <<: *conf-template
     src: "needrestart_blacklist.conf.j2"
     dest: "/etc/needrestart/conf.d/blacklist.conf"
-  when: ( needrestart_blacklist_bin | default() ) OR ( needrestart_blacklist_rc | default() )
+  when: ( needrestart_blacklist_bin | default() ) or ( needrestart_blacklist_rc | default() )
 
 - name: Configure needrestart mail
   ansible.builtin.template:
