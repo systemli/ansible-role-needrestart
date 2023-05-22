@@ -36,7 +36,7 @@
 # ATTENTION: If needrestart is configured to run in interactive mode but is run
 # non-interactive (i.e. unattended-upgrades) it will fallback to list only mode.
 #
-$nrconf{restart} = '{{ needrestart_action }}';
+#$nrconf{restart} = '{{ needrestart_action }}';
 
 # Use preferred UI package.
 #$nrconf{ui} = 'NeedRestart::UI::stdio';
@@ -197,7 +197,7 @@ $nrconf{skip_mapfiles} = -1;
 # Enable/disable CPU microcode update hints:
 #  1: requires the user to acknowledge pending updates
 #  0: disable microcode checks completely
-$nrconf{ucodehints} = {{ needrestart_ucodehints }};
+#$nrconf{ucodehints} = {{ needrestart_ucodehints }};
 
 # Nagios Plugin: configure return code use by nagios
 # as service status[1].
