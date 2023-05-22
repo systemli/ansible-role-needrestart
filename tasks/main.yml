@@ -27,6 +27,15 @@
     mode: "0644"
   when: needrestart_ignorelist | default()
 
+- name: Ensure needrestart blacklist config include is latest
+  ansible.builtin.template:
+    src: "needrestart_blacklist.conf.j2"
+    dest: "/etc/needrestart/conf.d/blacklist.conf"
+    owner: root
+    group: root
+    mode: "0644"
+  when: ( needrestart_blacklist_bin | default() ) OR ( needrestart_blacklist_rc | default() )
+
 - name: Configure needrestart mail
   ansible.builtin.template:
     src: 600-mail.j2
