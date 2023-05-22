@@ -16,7 +16,6 @@
     mode: "0644"
   with_items:
     - notify.conf
-    - needrestart.conf
 
 - name: Ensure custom needrestart config is deployed
   ansible.builtin.template:
