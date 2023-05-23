@@ -8,7 +8,7 @@
     cache_valid_time: 600
 
 - name: Ensure needrestart config is latest
-  ansible.builtin.template: &conf-template
+  ansible.builtin.template:
     src: "notify.conf.j2"
     dest: "/etc/needrestart/notify.conf"
     owner: root
@@ -17,29 +17,36 @@
 
 - name: Ensure custom needrestart config is deployed
   ansible.builtin.template:
-    <<: *conf-template
     src: "custom_needrestart.conf.j2"
     dest: "/etc/needrestart/conf.d/custom_needrestart.conf"
+    owner: root
+    group: root
+    mode: "0644"
 
 - name: Ensure needrestart ignorelist config include is latest
   ansible.builtin.template:
-    <<: *conf-template
     src: "needrestart_ignorelist.conf.j2"
     dest: "/etc/needrestart/conf.d/ignorelist.conf"
+    owner: root
+    group: root
+    mode: "0644"
   when: needrestart_ignorelist | default()
 
 - name: Ensure needrestart blacklist config include is latest
   ansible.builtin.template:
-    <<: *conf-template
     src: "needrestart_blacklist.conf.j2"
     dest: "/etc/needrestart/conf.d/blacklist.conf"
+    owner: root
+    group: root
+    mode: "0644"
   when: ( needrestart_blacklist_bin | default() ) or ( needrestart_blacklist_rc | default() )
 
 - name: Configure needrestart mail
   ansible.builtin.template:
-    <<: *conf-template
     src: 600-mail.j2
     dest: /etc/needrestart/notify.d/600-mail
+    owner: root
+    group: root
     mode: "0755"
 
 - name: Ensure the directory for check_mk local check exists
