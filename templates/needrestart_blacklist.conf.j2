@@ -10,7 +10,7 @@ push ( @{$nrconf{blacklist}}, (
 );
 
 
-#Balcklist services
+#Blacklist services
 push ( @{$nrconf{blacklist_rc}}, (
 {% for blacklistrc in needrestart_blacklist_rc %}
     qr(^{{ blacklistrc }}$),
