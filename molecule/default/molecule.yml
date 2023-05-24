@@ -6,7 +6,3 @@ driver:
 platforms:
   - name: needrestart-bullseye64
     box: debian/bullseye64
-lint: yamllint .
-provisioner:
-  name: ansible
-  become: true
