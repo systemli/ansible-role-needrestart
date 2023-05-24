@@ -7,16 +7,30 @@
     state: present
     cache_valid_time: 600
 
-- name: Ensure needrestart config is latest
-  ansible.builtin.template:
-    src: "{{ item }}.j2"
-    dest: "/etc/needrestart/{{ item }}"
+- name: Override outdated needrestart.conf
+  ansible.builtin.copy:
+    src: "needrestart.conf"
+    dest: "/etc/needrestart/needrestart.conf"
     owner: root
     group: root
     mode: "0644"
-  with_items:
-    - notify.conf
-    - needrestart.conf
+  when: needrestart_update_needrestart_conf
+
+- name: Ensure needrestart config is latest
+  ansible.builtin.template:
+    src: "notify.conf.j2"
+    dest: "/etc/needrestart/notify.conf"
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Ensure custom needrestart config is deployed
+  ansible.builtin.template:
+    src: "custom_needrestart.conf.j2"
+    dest: "/etc/needrestart/conf.d/custom_needrestart.conf"
+    owner: root
+    group: root
+    mode: "0644"
 
 - name: Ensure needrestart ignorelist config include is latest
   ansible.builtin.template:
@@ -26,6 +40,15 @@
     group: root
     mode: "0644"
   when: needrestart_ignorelist | default()
+
+- name: Ensure needrestart blacklist config include is latest
+  ansible.builtin.template:
+    src: "needrestart_blacklist.conf.j2"
+    dest: "/etc/needrestart/conf.d/blacklist.conf"
+    owner: root
+    group: root
+    mode: "0644"
+  when: ( needrestart_blacklist_bin | default() ) or ( needrestart_blacklist_rc | default() )
 
 - name: Configure needrestart mail
   ansible.builtin.template:

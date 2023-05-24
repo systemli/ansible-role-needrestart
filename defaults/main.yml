@@ -35,3 +35,6 @@ needrestart_blacklist_bin: []
 needrestart_checkmk_localcheckdir: /usr/lib/check_mk_agent/local
 needrestart_checkmk_localcheck: False
 needrestart_checkmk_mrpe: False
+
+# Override old needrestart.conf
+needrestart_update_needrestart_conf: False

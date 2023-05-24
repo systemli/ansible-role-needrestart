@@ -1,0 +1,6 @@
+# This file overrides needrestart.conf.
+# It is managed by Ansible.
+
+$nrconf{restart} = '{{ needrestart_action }}';
+$nrconf{ucodehints} = {{ needrestart_ucodehints }};
+
