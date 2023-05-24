@@ -7,6 +7,15 @@
     state: present
     cache_valid_time: 600
 
+- name: Override outdated needrestart.conf
+  ansible.builtin.copy:
+    src: "needrestart.conf"
+    dest: "/etc/needrestart/needrestart.conf"
+    owner: root
+    group: root
+    mode: "0644"
+  when: needrestart_update_needrestart_conf
+
 - name: Ensure needrestart config is latest
   ansible.builtin.template:
     src: "notify.conf.j2"
