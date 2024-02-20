@@ -38,3 +38,10 @@ needrestart_checkmk_mrpe: False
 
 # Override old needrestart.conf
 needrestart_update_needrestart_conf: False
+
+# Register custom restart scripts
+# Example:
+# needrestart_restartd:
+#   - name: unbound
+#     script: "systemctl restart unbound.service"
+needrestart_restartd: []
