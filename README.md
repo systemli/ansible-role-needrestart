@@ -40,6 +40,13 @@ Defaults:
     #   - /opt/.*/java
     needrestart_blacklist_bin: []
 
+    # Custom needrestart scripts
+    # Example:
+    # needrestart_restartd:
+    #   - name: unbound
+    #     script: "systemctl restart unbound.service"
+    needrestart_restartd: []
+
 Download
 --------
 

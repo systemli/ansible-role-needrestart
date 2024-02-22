@@ -98,3 +98,12 @@
     regexp: '^NEEDRESTART\s+sudo -n -- /usr/sbin/needrestart -p'
     state: absent
   when: not (needrestart_checkmk_mrpe | default(False))
+
+- name: Register custom restart scripts
+  ansible.builtin.copy:
+    content: "{{ item.script }}"
+    dest: "/etc/needrestart/restart.d/{{ item.service_name }}.service"
+    owner: root
+    group: root
+    mode: "0755"
+  loop: "{{ needrestart_restartd }}"
