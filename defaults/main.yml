@@ -31,6 +31,12 @@ needrestart_blacklist_rc: []
 #   - /opt/.*/java
 needrestart_blacklist_bin: []
 
+# Blacklist files as regex
+# Example:
+# needrestart_blacklist_interp:
+#   - /nexus-data/.*/bundle.jar
+needrestart_blacklist_interp: []
+
 # needrestart check_mk related
 needrestart_checkmk_localcheckdir: /usr/lib/check_mk_agent/local
 needrestart_checkmk_localcheck: False

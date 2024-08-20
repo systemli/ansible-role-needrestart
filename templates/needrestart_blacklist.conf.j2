@@ -18,3 +18,10 @@ push ( @{$nrconf{blacklist_rc}}, (
     )
 );
 
+#Blacklist script files
+push ( @{$nrconf{blacklist_interp}}, (
+{% for blacklistinterp in needrestart_blacklist_interp %}
+    qr(^{{ blacklistinterp }}$),
+{% endfor %}
+    )
+);
