@@ -66,7 +66,7 @@ Extended Variables Example
 
    
     # Admins should be informed via email
-    needrestart_disable_email: 0 
+    needrestart_notifyd_disable_email: 0 
     
     ## Restart services (l)ist only, (i)nteractive or (a)utomatically. 
     needrestart_action: a
