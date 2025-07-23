@@ -23,6 +23,10 @@ elif [ $STATUSERR -gt 1 ]; then
 fi
 STATUSDESCR=$(cat $OFILE | sed '1!d; s/^[A-Z]\+ - //g;s/|.*//g')
 STATUSPERF=$(cat $OFILE | sed '1!d; s/.*| *//g;s/ /|/g')
+if [ $STATUSERR -gt 0 ]; then
+	STATUSDESCREXT=$(sed '1d; s/-//g' $OFILE)
+	[ -n "$STATUSDESCREXT" ] && STATUSDESCR="$STATUSDESCR (${STATUSDESCREXT//[$'\r\n']})"
+fi
 
 echo "$STATUSERR NEEDRESTART $STATUSPERF $STATUSERRTXT - $STATUSDESCR"
 exit $STATUSERR
