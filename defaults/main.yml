@@ -17,7 +17,11 @@ needrestart_ucodehints: 1
 needrestart_mail_address: $NR_USERNAME
 
 # Services which should be ignored
-needrestart_ignorelist: []
+# Example:
+# needrestart_ignorelist:
+#   onlyoffice:
+#     - rabbitmq-server.service
+needrestart_ignorelist: {}
 
 # Services blacklisted as regex
 # Example:
