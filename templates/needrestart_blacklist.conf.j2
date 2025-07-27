@@ -1,6 +1,7 @@
 # This file overrides the blacklist from needrestart.conf.
 # It is managed by Ansible.
 
+{% if needrestart_blacklist_bin %}
 # Blacklist binaries
 push ( @{$nrconf{blacklist}}, (
 {% for blacklistbin in needrestart_blacklist_bin %}
@@ -8,8 +9,9 @@ push ( @{$nrconf{blacklist}}, (
 {% endfor %}
     )
 );
+{% endif %}
 
-
+{% if needrestart_blacklist_rc %}
 #Blacklist services
 push ( @{$nrconf{blacklist_rc}}, (
 {% for blacklistrc in needrestart_blacklist_rc %}
@@ -17,6 +19,7 @@ push ( @{$nrconf{blacklist_rc}}, (
 {% endfor %}
     )
 );
+{% endif %}
 
 #Blacklist script files
 push ( @{$nrconf{blacklist_interp}}, (
