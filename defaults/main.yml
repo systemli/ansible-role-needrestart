@@ -22,7 +22,7 @@ needrestart_mail_address: $NR_USERNAME
 # Example:
 # needrestart_ignorelist:
 #   onlyoffice:
-#     - rabbitmq-server.service
+#     - rabbitmq-server\.service
 needrestart_ignorelist: {}
 
 # Services blacklisted as regex
