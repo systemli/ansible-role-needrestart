@@ -1,8 +1,19 @@
 ---
 driver:
-  name: vagrant
-  provider:
-    name: virtualbox
+  name: docker
 platforms:
-  - name: needrestart-trixie64
-    box: debian/trixie64
+  - name: debian13
+    image: geerlingguy/docker-debian13-ansible
+    volumes:
+      - /var/lib/containerd
+    command: ""
+    pre_build_image: true
+    cgroupns: host
+provisioner:
+  name: ansible
+  ansible_args:
+    - --diff
+lint: |
+  set -e
+  yamllint .
+  ansible-lint .
