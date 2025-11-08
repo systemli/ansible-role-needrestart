@@ -4,5 +4,5 @@ driver:
   provider:
     name: virtualbox
 platforms:
-  - name: needrestart-bullseye64
-    box: debian/bullseye64
+  - name: needrestart-trixie64
+    box: debian/trixie64
