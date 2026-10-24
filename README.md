@@ -22,11 +22,20 @@ Defaults:
     # Restart services (l)ist only, (i)nteractive or (a)utomatically.
     needrestart_action: l
     
+    # Enable/disable (1/0) CPU microcode update hints; default: 1=enable
+    needrestart_ucodehints: 1
+
     # Email which will be notified
     needrestart_mail_address: $NR_USERNAME
     
-    # Services which should be ignored
-    needrestart_ignorelist: []
+    # Services which should be ignored for restart
+    # Note: services listed here will not be automatically restarted but will be still reported
+    #       in order to ignore services completely incl. nagios check, use needrestart_blacklist_rc
+    # Example:
+    # needrestart_ignorelist:
+    #   onlyoffice:
+    #     - rabbitmq-server\.service
+    needrestart_ignorelist: {}
 
     # Services blacklisted as regex
     # Example:
@@ -39,6 +48,20 @@ Defaults:
     # needrestart_blacklist_bin:
     #   - /opt/.*/java
     needrestart_blacklist_bin: []
+
+    # Blacklist files as regex
+    # Example:
+    # needrestart_blacklist_interp:
+    #   - /nexus-data/.*/bundle.jar
+    needrestart_blacklist_interp: []
+
+    # needrestart check_mk related
+    needrestart_checkmk_localcheckdir: /usr/lib/check_mk_agent/local
+    needrestart_checkmk_localcheck: False
+    needrestart_checkmk_mrpe: False
+
+    # Override old needrestart.conf
+    needrestart_update_needrestart_conf: False
 
     # Custom needrestart scripts
     # Example:
