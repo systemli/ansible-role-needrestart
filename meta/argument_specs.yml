@@ -1,0 +1,84 @@
+---
+argument_specs:
+  main:
+    short_description: Install and configure needrestart
+    description:
+      - Configures needrestart, its notifications, ignore and blacklist lists, optional check_mk checks and custom restart scripts.
+    options:
+      needrestart_notifyd_disable_email:
+        type: int
+        description:
+          - Admins should be informed via email
+      needrestart_notifyd_disable_write_tty:
+        type: int
+        description:
+          - All other notifications should be disabled
+      needrestart_notifyd_disable_needrestart_session:
+        type: int
+      needrestart_notifyd_disable_notify_send:
+        type: int
+      needrestart_action:
+        type: str
+        choices:
+          - l
+          - i
+          - a
+        description:
+          - Restart services (l)ist only, (i)nteractive or (a)utomatically.
+      needrestart_ucodehints:
+        type: int
+        description:
+          - Enable (1) or disable (0) CPU microcode update hints.
+      needrestart_mail_address:
+        type: str
+        description:
+          - Email address which will be notified.
+      needrestart_ignorelist:
+        type: dict
+        description:
+          - Services which should be ignored for restart, as a mapping of a name to a list of service regexes. They are still reported, to ignore services completely use C(needrestart_blacklist_rc).
+      needrestart_blacklist_rc:
+        type: list
+        elements: str
+        description:
+          - Services blacklisted as regex.
+      needrestart_blacklist_bin:
+        type: list
+        elements: str
+        description:
+          - Binaries blacklisted as regex.
+      needrestart_blacklist_interp:
+        type: list
+        elements: str
+        description:
+          - Interpreter files blacklisted as regex.
+      needrestart_checkmk_localcheckdir:
+        type: str
+        description:
+          - needrestart check_mk related
+      needrestart_checkmk_localcheck:
+        type: bool
+      needrestart_checkmk_mrpe:
+        type: bool
+      needrestart_update_needrestart_conf:
+        type: bool
+        description:
+          - Override old needrestart.conf
+      needrestart_restartd:
+        type: list
+        elements: dict
+        description:
+          - Custom restart scripts.
+        options:
+          service_name:
+            type: str
+            required: true
+            description:
+              - Name of the service the script is registered for (file name below restart.d).
+          name:
+            type: str
+            description:
+              - Unused, accepted for compatibility with the example in the defaults.
+          script:
+            type: str
+            required: true
