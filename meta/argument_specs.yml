@@ -36,7 +36,9 @@ argument_specs:
       needrestart_ignorelist:
         type: dict
         description:
-          - Services which should be ignored for restart, as a mapping of a name to a list of service regexes. They are still reported, to ignore services completely use C(needrestart_blacklist_rc).
+          - >-
+            Services which should be ignored for restart, as a mapping of a name to a list of service regexes.
+            They are still reported, to ignore services completely use C(needrestart_blacklist_rc).
       needrestart_blacklist_rc:
         type: list
         elements: str

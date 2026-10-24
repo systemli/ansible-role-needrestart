@@ -45,11 +45,11 @@ needrestart_blacklist_interp: []
 
 # needrestart check_mk related
 needrestart_checkmk_localcheckdir: /usr/lib/check_mk_agent/local
-needrestart_checkmk_localcheck: False
-needrestart_checkmk_mrpe: False
+needrestart_checkmk_localcheck: false
+needrestart_checkmk_mrpe: false
 
 # Override old needrestart.conf
-needrestart_update_needrestart_conf: False
+needrestart_update_needrestart_conf: false
 
 # Register custom restart scripts
 # Example:
