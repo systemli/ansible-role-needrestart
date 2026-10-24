@@ -12,8 +12,7 @@ Ansible role that installs and configures needrestart on Debian (trixie, bookwor
 
 ## Checks
 
-- `ansible-lint .` must pass without warnings (config in `.ansible-lint`; molecule and `.github` are excluded)
-- `yamllint .` uses `.yamllint`
+- `ansible-lint .` must pass without warnings (default configuration, no config file)
 - `molecule test` runs the role in a container; CI runs it via the shared systemli workflow
 - `ansible-lint` creates `.ansible/`; never commit it
 

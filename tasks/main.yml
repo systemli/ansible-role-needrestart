@@ -88,7 +88,7 @@
     dest: /etc/check_mk/mrpe.cfg
     line: "NEEDRESTART\tsudo -n -- /usr/sbin/needrestart -p"
     state: present
-    create: yes
+    create: true
     mode: "0644"
   when: needrestart_checkmk_mrpe | default(False)
 
