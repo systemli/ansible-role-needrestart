@@ -74,3 +74,6 @@ tramp
 .vagrant
 molecule/*/.molecule
 tests/__pycache__
+
+# ansible-lint cache
+.ansible/
