@@ -4,7 +4,7 @@ ansible-role-needrestart
 [![Build Status](https://github.com/systemli/ansible-role-needrestart/workflows/Integration/badge.svg?branch=main)](https://github.com/systemli/ansible-role-needrestart/actions?query=workflow%3AIntegration)
 [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-needrestart-blue.svg)](https://galaxy.ansible.com/systemli/needrestart/)
 
-Role to install & maintain needrestart 
+Role to install & maintain needrestart
 
 Role Variables
 --------------
@@ -90,15 +90,19 @@ Extended Variables Example
 Testing & Development
 ---------------------
 
-Tests
------
+Molecule with the Docker driver and GitHub Actions is used for continuous
+testing. CI runs the role on Debian 13 (trixie) and Debian 12 (bookworm).
+On the local environment you can test the role (Debian 13 container) with
 
-Molecule, Docker and Github Actions is used for continous testing.
-On the local environment you can easily test the role with
+    molecule test
 
-    molecule test 
+or keep the container around while developing:
 
-This requires Molecule, Vagrant and `python-vagrant` to be installed.
+    molecule converge
+    molecule login
+
+This requires Docker (or a compatible container runtime), `molecule`,
+`molecule-plugins[docker]` and `ansible-lint` to be installed.
 
 License
 -------
