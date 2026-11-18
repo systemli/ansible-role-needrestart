@@ -48,10 +48,7 @@
     owner: root
     group: root
     mode: "0644"
-  when: >
-    ( needrestart_blacklist_bin | default([]) | length > 0 ) or 
-    ( needrestart_blacklist_rc | default([]) | length > 0 ) or
-    ( needrestart_blacklist_interp | default([]) | length > 0 )
+  when: (needrestart_blacklist_bin + needrestart_blacklist_rc + needrestart_blacklist_interp) | length > 0
 
 - name: Configure needrestart mail
   ansible.builtin.template:
