@@ -39,7 +39,6 @@
     owner: root
     group: root
     mode: "0644"
-  when: needrestart_ignorelist | default([]) | length > 0
 
 - name: Ensure needrestart blacklist config include is latest
   ansible.builtin.template:
@@ -48,7 +47,6 @@
     owner: root
     group: root
     mode: "0644"
-  when: (needrestart_blacklist_bin + needrestart_blacklist_rc + needrestart_blacklist_interp) | length > 0
 
 - name: Configure needrestart mail
   ansible.builtin.template:
