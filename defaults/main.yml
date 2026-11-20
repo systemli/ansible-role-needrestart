@@ -25,6 +25,14 @@ needrestart_mail_address: $NR_USERNAME
 #     - rabbitmq-server\.service
 needrestart_ignorelist: {}
 
+# Containers (like LXC, nspawn,..) which should be ignored for restart
+# Note: containers listed here will not be automatically restarted but will be still reported
+# Example:
+# needrestart_ignorelist_cont:
+#   nspawn:
+#     - machine_name
+needrestart_ignorelist_cont: {}
+
 # Services blacklisted as regex
 # Example:
 # needrestart_blacklist_rc:
@@ -42,6 +50,12 @@ needrestart_blacklist_bin: []
 # needrestart_blacklist_interp:
 #   - /nexus-data/.*/bundle.jar
 needrestart_blacklist_interp: []
+
+# Blacklist containers as regex
+# Example:
+# needrestart_blacklist_cont:
+#   - ci-017-222a371c
+needrestart_blacklist_cont: []
 
 # needrestart check_mk related
 needrestart_checkmk_localcheckdir: /usr/lib/check_mk_agent/local
