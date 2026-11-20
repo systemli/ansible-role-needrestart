@@ -30,3 +30,13 @@ push ( @{$nrconf{blacklist_interp}}, (
     )
 );
 {% endif %}
+
+{% if needrestart_blacklist_cont %}
+#Blacklist containers
+push ( @{$nrconf{blacklist_cont}}, (
+{% for blacklistcont in needrestart_blacklist_cont %}
+    qr(^{{ blacklistcont }}$),
+{% endfor %}
+    )
+);
+{% endif %}

@@ -8,3 +8,11 @@ $nrconf{override_rc}->{q(^{{ service }})} = 0;
 {% endfor %}
 
 {% endfor %}
+
+{% for key, containers in needrestart_ignorelist_cont.items()|sort %}
+# {{ key }}
+{% for container in containers|sort %}
+$nrconf{override_cont}->{q(^{{ container }})} = 0;
+{% endfor %}
+
+{% endfor %}
